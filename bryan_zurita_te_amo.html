@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan Zurita, te amo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Great Vibes / Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        script: ['"Great Vibes"', 'cursive'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        roseGold: '#e6b89c',
+                        warmCream: '#fff8f6',
+                        deepCrimson: '#881337',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float-gentle': 'floatGentle 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        floatGentle: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen w-full overflow-x-hidden bg-gradient-to-br from-rose-100 via-pink-50 to-amber-100 text-rose-950 font-sans relative flex flex-col items-center justify-center selection:bg-rose-300 selection:text-rose-900">
+
+    <!-- Lienzo para corazones flotantes y lluvia de confeti romántico -->
+    <canvas id="romanticCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Resplandores decorativos de fondo -->
+    <div class="fixed top-[-10%] left-[-10%] w-96 h-96 bg-rose-300/30 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[28rem] h-[28rem] bg-amber-300/30 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+
+    <!-- Contenedor Principal -->
+    <main class="relative z-10 w-full max-w-3xl px-4 sm:px-8 py-12 flex flex-col items-center text-center">
+        
+        <!-- Tarjeta de cristal (Glassmorphism) -->
+        <div class="w-full bg-white/65 backdrop-blur-xl border border-white/80 shadow-[0_20px_60px_-15px_rgba(225,29,72,0.18)] rounded-3xl p-8 sm:p-14 transition-all duration-700 animate-float-gentle">
+            
+            <!-- Emblema superior -->
+            <div class="inline-flex items-center justify-center p-3.5 mb-6 rounded-full bg-gradient-to-tr from-rose-500/15 to-amber-500/15 border border-rose-200/70 shadow-inner">
+                <i data-lucide="heart" class="w-7 h-7 text-rose-600 fill-rose-500 animate-pulse"></i>
+            </div>
+
+            <!-- Subtítulo sutil -->
+            <p class="uppercase tracking-[0.25em] text-xs sm:text-sm font-semibold text-amber-700/80 mb-3">
+                Para la persona más especial de mi vida
+            </p>
+
+            <!-- Mensaje Principal -->
+            <h1 class="font-script text-6xl sm:text-8xl md:text-9xl bg-gradient-to-r from-rose-700 via-red-600 to-amber-600 bg-clip-text text-transparent py-2 leading-tight drop-shadow-sm select-none">
+                Bryan Zurita, te amo
+            </h1>
+
+            <!-- Línea ornamental dorada -->
+            <div class="flex items-center justify-center gap-3 my-6">
+                <span class="h-[1px] w-16 sm:w-24 bg-gradient-to-r from-transparent to-amber-400"></span>
+                <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+                <span class="h-[1px] w-16 sm:w-24 bg-gradient-to-l from-transparent to-amber-400"></span>
+            </div>
+
+            <!-- Frase romántica introductoria -->
+            <p class="font-serif italic text-lg sm:text-2xl text-rose-900/85 max-w-xl mx-auto leading-relaxed mb-8">
+                "Cada día a tu lado se convierte en mi recuerdo favorito. Gracias por iluminar mi mundo con tu sonrisa."
+            </p>
+
+            <!-- Botón Interactivo -->
+            <div class="flex flex-col items-center gap-4">
+                <button id="loveBtn" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-base sm:text-lg font-medium text-white bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500 rounded-full shadow-lg shadow-rose-500/30 hover:shadow-xl hover:shadow-rose-500/40 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-4 focus:ring-rose-300">
+                    <i data-lucide="heart" class="w-5 h-5 fill-white transition-transform duration-300 group-hover:scale-125"></i>
+                    <span>Enviar lluvia de amor</span>
+                    <i data-lucide="sparkles" class="w-5 h-5 text-amber-100 transition-transform duration-300 group-hover:rotate-12"></i>
+                </button>
+                <span id="clickCounterText" class="text-xs text-rose-700/60 font-medium h-4 transition-opacity duration-300"></span>
+            </div>
+
+            <!-- Dedicatoria dulce desplegable -->
+            <div id="dedicationCard" class="hidden opacity-0 transform translate-y-4 transition-all duration-700 ease-out mt-8 pt-8 border-t border-rose-200/70">
+                <div class="bg-gradient-to-br from-rose-50/90 to-amber-50/90 rounded-2xl p-6 sm:p-8 border border-amber-200/60 shadow-sm relative">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-white px-3 py-0.5 rounded-full border border-rose-200 text-xs font-semibold text-rose-600 shadow-sm">
+                        Con todo mi corazón
+                    </div>
+                    <p id="dedicationMessage" class="font-serif text-base sm:text-xl text-rose-950 leading-relaxed">
+                        Bryan Zurita, eres el sueño del que nunca quiero despertar. No importa cuánto tiempo pase, mi lugar favorito siempre será a tu lado. Te amo hoy, mañana y siempre.
+                    </p>
+                    <div class="mt-4 flex items-center justify-center gap-1.5 text-amber-600">
+                        <i data-lucide="heart" class="w-4 h-4 fill-rose-500 text-rose-500"></i>
+                        <i data-lucide="heart" class="w-5 h-5 fill-rose-600 text-rose-600"></i>
+                        <i data-lucide="heart" class="w-4 h-4 fill-rose-500 text-rose-500"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Pie de página discreto -->
+        <footer class="mt-8 text-xs sm:text-sm text-rose-800/60 font-medium tracking-wide">
+            Hecho con amor infinito solo para ti, Bryan Zurita ✨
+        </footer>
+    </main>
+
+    <script>
+// ... existing code ... -->
+        // Dedicatorias dulces que rotan si se hace clic varias veces
+        const dedications = [
+            "Bryan Zurita, eres el sueño del que nunca quiero despertar. No importa cuánto tiempo pase, mi lugar favorito siempre será a tu lado. Te amo hoy, mañana y siempre.",
+            "En cada latido de mi corazón está tu nombre, Bryan Zurita. Gracias por ser mi alegría, mi paz y mi mayor inspiración cada día.",
+            "Si volviera a nacer, te volvería a elegir a ti una y mil veces más. Eres lo más hermoso que me ha pasado en la vida, Bryan Zurita."
+        ];
+
+        let clickCount = 0;
+// ... existing code ... -->
+            clickCounterText.textContent = clickCount === 1 
+                ? "¡Has enviado 1 lluvia de amor para Bryan Zurita!" 
+                : `¡Has enviado ${clickCount} lluvias de amor para Bryan Zurita!`;
+        });
+    </script>
+</body>
+</html>
